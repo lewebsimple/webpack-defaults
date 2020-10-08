@@ -3,6 +3,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const postcssPresetEnv = require('postcss-preset-env');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
@@ -121,7 +122,8 @@ module.exports = {
   
   optimization: {
     minimizer: [
-      new OptimizeCssAssetsPlugin({})
+      new TerserPlugin(),
+      new OptimizeCssAssetsPlugin()
     ]
   },
 
