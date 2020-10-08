@@ -72,6 +72,10 @@ module.exports = {
 
   ],
 
+  resolveLoader: {
+    modules: ['node_modules', resolve(__dirname, 'node_modules/webpack-defaults/node_modules')]
+  }
+
   devtool: mode === 'development' ? 'source-map' : false,
   
   performance: { hints: false },
