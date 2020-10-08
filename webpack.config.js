@@ -1,4 +1,5 @@
 const mode = process.argv.includes('production') ? 'production' : 'development';
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
 
