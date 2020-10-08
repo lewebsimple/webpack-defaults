@@ -1,6 +1,13 @@
 const mode = process.argv.includes('production') ? 'production' : 'development';
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const postcssPresetEnv = require('postcss-preset-env');
+
+export const postcssOptions = {
+  plugins: [
+    postcssPresetEnv(),
+  ],
+};
 
 module.exports = {
 
@@ -40,10 +47,14 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
           {
             loader: 'css-loader',
-            options: { sourceMap: true },
+            options: { sourceMap: true, importLoaders: 1 },
+          },
+          {
+            loader: 'postcss-loader',
+            options: { sourceMap: true, postcssOptions },
           },
         ],
       },
@@ -57,8 +68,8 @@ module.exports = {
     ...(mode === 'production' ? [new CleanWebpackPlugin()] : []),
 
     // Extract styles to a single CSS file
-    new MiniCssExtractPlugin({ filename: 'css/styles.css' }),
-    
+    new MiniCssExtractPlugin({ filename: mode === 'production' ? '[name]?hash=[contenthash].css' : '[name].css', }),
+
   ],
 
   devtool: mode === 'development' ? 'source-map' : false,
