@@ -19,20 +19,6 @@ module.exports = {
   module: {
     rules: [
 
-      // Fonts
-      {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
-        loader: 'file-loader',
-        options: { name: 'fonts/[name].[ext]' },
-      },
-
-      // Images
-      {
-        test: /\.(gif|png|jpe?g|svg)$/,
-        loader: 'file-loader',
-        options: { name: 'images/[name].[ext]' },
-      },
-
       // JavaScript
       {
         test: /\.js$/,
@@ -93,6 +79,20 @@ module.exports = {
         ],
       },
 
+      // Fonts
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        loader: 'file-loader',
+        options: { name: 'fonts/[name].[ext]' },
+      },
+
+      // Images
+      {
+        test: /\.(gif|png|jpe?g|svg)$/,
+        loader: 'file-loader',
+        options: { name: 'images/[name].[ext]' },
+      },
+      
     ]
   },
 
