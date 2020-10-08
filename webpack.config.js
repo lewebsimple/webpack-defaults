@@ -3,7 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
 
-export const postcssOptions = {
+const postcssOptions = {
   plugins: [
     postcssPresetEnv(),
   ],
