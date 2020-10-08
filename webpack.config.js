@@ -1,5 +1,6 @@
 const mode = process.argv.includes('production') ? 'production' : 'development';
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
 
@@ -33,7 +34,19 @@ module.exports = {
             plugins: ['@babel/plugin-transform-runtime'],
           },
         },
-      }
+      },
+
+      // CSS
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { sourceMap: true },
+          },
+        ],
+      },
 
     ]
   },
