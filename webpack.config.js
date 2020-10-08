@@ -56,6 +56,9 @@ module.exports = {
     // Clean assets directory in production
     ...(mode === 'production' ? [new CleanWebpackPlugin()] : []),
 
+    // Extract styles to a single CSS file
+    new MiniCssExtractPlugin({ filename: 'css/styles.css' }),
+    
   ],
 
   devtool: mode === 'development' ? 'source-map' : false,
