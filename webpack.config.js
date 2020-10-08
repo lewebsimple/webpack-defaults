@@ -1,6 +1,9 @@
 const mode = process.argv.includes('production') ? 'production' : 'development';
 
 module.exports = {
+
+  mode,
+
   module: {
     rules: [
       // Scripts
@@ -17,8 +20,18 @@ module.exports = {
       }
     ]
   },
-  mode,
+
+  plugins: [
+
+    // Clean assets directory in production
+    ...(mode === 'production' ? [new CleanWebpackPlugin()] : []),
+
+  ],
+
+  devtool: mode === 'development' ? 'source-map' : false,
+  
   performance: { hints: false },
+  
   stats: {
     all: false,
     assets: true,
@@ -26,4 +39,5 @@ module.exports = {
     timings: true,
     warnings: true,
   },
+
 };
