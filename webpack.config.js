@@ -70,7 +70,7 @@ module.exports = {
     ...(mode === 'production' ? [new CleanWebpackPlugin()] : []),
 
     // Extract styles to a single CSS file
-    new MiniCssExtractPlugin({ filename: mode === 'production' ? '[name]?hash=[contenthash].css' : '[name].css', }),
+    new MiniCssExtractPlugin({ filename: 'css/[name].css', }),
 
   ],
 
