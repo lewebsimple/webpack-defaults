@@ -78,7 +78,7 @@ module.exports = {
         loader: 'file-loader',
         options: { name: 'images/[name].[ext]' },
       },
-      
+
     ]
   },
 
@@ -113,16 +113,16 @@ module.exports = {
   },
 
   devtool: mode === 'development' ? 'source-map' : false,
-  
+
   optimization: {
     minimizer: [
-      new TerserPlugin(),
+      new TerserPlugin({ extractComments: (astNode, comment) => false }),
       new OptimizeCssAssetsPlugin()
     ]
   },
 
   performance: { hints: false },
-  
+
   stats: {
     all: false,
     assets: true,
