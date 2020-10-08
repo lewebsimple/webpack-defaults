@@ -36,7 +36,7 @@ module.exports = {
       // JavaScript
       {
         test: /\.js$/,
-        exclude: /(node_modules)/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -44,6 +44,13 @@ module.exports = {
             plugins: ['@babel/plugin-transform-runtime'],
           },
         },
+      },
+
+      // TypeScript
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        loader: 'ts-loader',
       },
 
       // CSS
