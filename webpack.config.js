@@ -1,7 +1,9 @@
-const mode = process.argv.includes('production') ? 'production' : 'development';
+const { resolve } = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
+
+const mode = process.argv.includes('production') ? 'production' : 'development';
 
 const postcssOptions = {
   plugins: [
