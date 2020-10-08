@@ -1,5 +1,17 @@
 {
   "name": "webpack-defaults",
   "version": "1.0.0",
-  "private": true
+  "main": "webpack.config.js",
+  "private": true,
+  "bin": {
+		"webpack": "./node_modules/.bin/webpack"
+	},
+  "dependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "babel-loader": "^8.1.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  }
 }
