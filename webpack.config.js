@@ -2,6 +2,7 @@ const { resolve } = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const mode = process.argv.includes('production') ? 'production' : 'development';
 
@@ -71,6 +72,15 @@ module.exports = {
 
     // Extract styles to a single CSS file
     new MiniCssExtractPlugin({ filename: 'css/[name].css', }),
+
+    // BrowserSync
+    ...(process.env.PROXY_HOST ? [new BrowserSyncPlugin({
+      host: 'localhost',
+      port: process.env.PROXY_PORT || 3000,
+      proxy: process.env.PROXY_HOST,
+      notify: false,
+      files: ['*.php', 'templates/**/*.php'],
+    })] : []),
 
   ],
 
