@@ -62,6 +62,30 @@ module.exports = {
         ],
       },
 
+      // SCSS
+      {
+        test: /\.scss$/,
+        use: [
+          mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+          {
+            loader: 'css-loader',
+            options: { sourceMap: true, importLoaders: 1 },
+          },
+          {
+            loader: 'postcss-loader',
+            options: { sourceMap: true, postcssOptions },
+          },
+          {
+            loader: 'resolve-url-loader',
+            options: { sourceMap: true },
+          },
+          {
+            loader: 'sass-loader',
+            options: { sourceMap: true },
+          },
+        ],
+      },
+
     ]
   },
 
