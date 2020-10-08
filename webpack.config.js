@@ -1,3 +1,5 @@
+const mode = process.argv.includes('production') ? 'production' : 'development';
+
 module.exports = {
   module: {
     rules: [
@@ -15,6 +17,7 @@ module.exports = {
       }
     ]
   },
+  mode,
   performance: { hints: false },
   stats: {
     all: false,
