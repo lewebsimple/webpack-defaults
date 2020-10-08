@@ -1,8 +1,9 @@
 const { resolve } = require('path');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const postcssPresetEnv = require('postcss-preset-env');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const postcssPresetEnv = require('postcss-preset-env');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const mode = process.argv.includes('production') ? 'production' : 'development';
@@ -45,27 +46,11 @@ module.exports = {
         loader: 'vue-loader'
       },
 
-      // CSS
+      // CSS / SCSS
       {
-        test: /\.css$/,
+        test: /\.(css|scss)$/,
         use: [
-          mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
-          {
-            loader: 'css-loader',
-            options: { sourceMap: true, importLoaders: 1 },
-          },
-          {
-            loader: 'postcss-loader',
-            options: { sourceMap: true, postcssOptions },
-          },
-        ],
-      },
-
-      // SCSS
-      {
-        test: /\.scss$/,
-        use: [
-          mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: { sourceMap: true, importLoaders: 1 },
@@ -134,6 +119,12 @@ module.exports = {
 
   devtool: mode === 'development' ? 'source-map' : false,
   
+  optimization: {
+    minimizer: [
+      new OptimizeCssAssetsPlugin({})
+    ]
+  },
+
   performance: { hints: false },
   
   stats: {
