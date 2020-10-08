@@ -2,6 +2,7 @@ const { resolve } = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const mode = process.argv.includes('production') ? 'production' : 'development';
@@ -35,6 +36,13 @@ module.exports = {
         test: /\.ts$/,
         exclude: /node_modules/,
         loader: 'ts-loader',
+        options: { appendTsSuffixTo: [/\.vue$/] },
+      },
+
+      // Vue.js
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
       },
 
       // CSS
@@ -102,6 +110,9 @@ module.exports = {
     // Extract styles to a single CSS file
     new MiniCssExtractPlugin({ filename: 'css/[name].css', }),
 
+    // Vue.js
+    new VueLoaderPlugin(),
+
     // BrowserSync
     ...(process.env.PROXY_HOST ? [new BrowserSyncPlugin({
       host: 'localhost',
@@ -112,6 +123,10 @@ module.exports = {
     })] : []),
 
   ],
+
+  resolve: {
+    extensions: ['.ts', '.js']
+  },
 
   resolveLoader: {
     modules: ['node_modules', resolve(__dirname, 'node_modules')]
