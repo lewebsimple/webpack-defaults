@@ -9,12 +9,6 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const mode = process.argv.includes('production') ? 'production' : 'development';
 
-const postcssOptions = {
-  plugins: [
-    postcssPresetEnv(),
-  ],
-};
-
 module.exports = {
 
   mode,
@@ -58,7 +52,7 @@ module.exports = {
           },
           {
             loader: 'postcss-loader',
-            options: { sourceMap: true, postcssOptions },
+            options: { sourceMap: true },
           },
           {
             loader: 'resolve-url-loader',
