@@ -92,9 +92,7 @@ module.exports = {
           },
           {
             loader: 'file-loader',
-            query: {
-              name: 'assets/[name].[hash:8].[ext]',
-            },
+            options: { name: 'images/[name].[ext]' },
           },
         ],
       },
