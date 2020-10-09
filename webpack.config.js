@@ -74,9 +74,29 @@ module.exports = {
 
       // Images
       {
-        test: /\.(gif|png|jpe?g|svg)$/,
+        test: /\.(gif|png|jpe?g)$/,
         loader: 'file-loader',
         options: { name: 'images/[name].[ext]' },
+      },
+
+      // SVG
+      {
+        test: /\.svg$/,
+        oneOf: [
+          {
+            resourceQuery: /inline/,
+            use: [
+              'babel-loader',
+              'vue-svg-loader',
+            ],
+          },
+          {
+            loader: 'file-loader',
+            query: {
+              name: 'assets/[name].[hash:8].[ext]',
+            },
+          },
+        ],
       },
 
     ]
